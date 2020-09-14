@@ -4,7 +4,7 @@ Code for Conservative Q-Learning for Offline Reinforcement Learning (https://arx
 
 In this repository we provide code for CQL algorithm described in the paper linked above. We provide code in two sub-directories: `atari` containing code for Atari experiments and `d4rl` containing code for D4RL experiments. Due to changes in the datasets in D4RL, we expect some changes in CQL performance on the new D4RL datasets and we will soon provide a table with new performance numbers for CQL here in this README. We will continually keep updating the numbers here.
 
-If you use this repository for your research, please use:
+If you find this repository useful for your research, please cite:
 
 ```
 @article{kumar2020conservative,
