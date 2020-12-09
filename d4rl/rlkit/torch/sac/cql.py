@@ -179,7 +179,7 @@ class CQLTrainer(TorchTrainer):
                 self.qf2(obs, new_obs_actions),
             )
 
-        policy_loss = (alpha*log_pi - q_new_actions).mean()
+        policy_loss = (alpha*log_pi - q_new_actions.detach()).mean()
 
         if self._current_epoch < self.policy_eval_start:
             """
