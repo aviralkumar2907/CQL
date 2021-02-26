@@ -142,9 +142,9 @@ class CQLTrainer(TorchTrainer):
             obs_temp, reparameterize=True, return_log_prob=True,
         )
         if not self.discrete:
-            return new_obs_actions, new_obs_log_pi.view(obs.shape[0], num_actions, 1)
+            return new_obs_actions.detach(), new_obs_log_pi.view(obs.shape[0], num_actions, 1).detach()
         else:
-            return new_obs_actions
+            return new_obs_actions.detach()
 
     def train_from_torch(self, batch):
         self._current_epoch += 1
@@ -283,6 +283,11 @@ class CQLTrainer(TorchTrainer):
         """
         Update networks
         """
+        self._num_policy_update_steps += 1
+        self.policy_optimizer.zero_grad()
+        policy_loss.backward(retain_graph=False)
+        self.policy_optimizer.step()
+        
         # Update the Q-functions iff 
         self._num_q_update_steps += 1
         self.qf1_optimizer.zero_grad()
@@ -293,11 +298,6 @@ class CQLTrainer(TorchTrainer):
             self.qf2_optimizer.zero_grad()
             qf2_loss.backward(retain_graph=True)
             self.qf2_optimizer.step()
-
-        self._num_policy_update_steps += 1
-        self.policy_optimizer.zero_grad()
-        policy_loss.backward(retain_graph=False)
-        self.policy_optimizer.step()
 
         """
         Soft Updates
