@@ -27,9 +27,9 @@ python -um batch_rl.fixed_replay.train \
   --base_dir=/tmp/batch_rl \
   --replay_dir=$DATA_DIR/Pong/1 \
   --agent_name=quantile \
-  --gin_files='batch_rl/fixed_replay/configs/quantile_pong.gin' \
+  --gin_files=./batch_rl/fixed_replay/configs/quantile.gin \
   --gin_bindings='FixedReplayRunner.num_iterations=1000' \
-  --gin_bindings='atari_lib.create_atari_environment.game_name = "Pong"'
+  --gin_bindings='atari_lib.create_atari_environment.game_name = "Pong"' \
   --gin_bindings='FixedReplayQuantileAgent.minq_weight=1.0'
 ```
 For 1% data, use `minq_weight=4.0` and for 10% data, use `minq_weight=1.0`. 
