@@ -162,7 +162,7 @@ class FixedReplayBuffer(object):
       # Should contain the files for add_count, action, observation, reward,
       # terminal and invalid_range
       ckpt_suffixes = [x for x in ckpt_counters if ckpt_counters[x] in [6, 7]]
-      if num_buffers is not None:
+      if num_buffers is not None and len(ckpt_suffixes) > 0:
         ckpt_suffixes = np.random.choice(
             ckpt_suffixes, num_buffers, replace=False)
       self._replay_buffers = []
