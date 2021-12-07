@@ -113,8 +113,7 @@ class QuantileAgent(rainbow_agent.RainbowAgent):
         tf_device=tf_device,
         optimizer=optimizer,
         summary_writer=summary_writer,
-        summary_writing_frequency=summary_writing_frequency,
-        min_q_weight=minq_weight)
+        summary_writing_frequency=summary_writing_frequency)
     
     self.minq_weight = minq_weight
     print ('min Q weight (QR-DQN): ', self.minq_weight)
